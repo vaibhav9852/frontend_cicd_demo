@@ -1,11 +1,31 @@
-const Users = () => {
+import axios from "axios";
+import React , { useEffect, useState } from "react";
+ 
+const Users : React.FC = () => {
+ const [users,setUsers] = useState<String[]>() 
+ console.log('users page')
+ const getUsers  =  async () : Promise<void> =>{
+    let {data}  = await  axios.get('http://localhost:5005/users') 
+    setUsers(data) 
+ }
+  useEffect(()=>{
+     getUsers() 
+  },[])
     return (
       <div>
         <h1>Users</h1>
-        <ul>
+        {
+         users?.map((user)=>(
+            <li>{user}</li>  
+          ))
+        }
+        {/* {
+          users.length<0 && <ul> 
           <li>name 1</li>
           <li>name 2</li>
-        </ul>
+          <li>name 3</li>
+           </ul>
+        }  */}
       </div>
     );
   };
