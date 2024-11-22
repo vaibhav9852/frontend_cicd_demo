@@ -1,5 +1,5 @@
 import axios from "axios";
-import React , { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
  
 const Users : React.FC = () => {
  const [users,setUsers] = useState<String[]>() 
@@ -13,7 +13,7 @@ const Users : React.FC = () => {
   },[])
     return (
       <div>
-        <h1>Users lIST</h1>
+        <h1>Users List</h1>
         {
          users?.map((user)=>(
             <li>{user}</li>  
