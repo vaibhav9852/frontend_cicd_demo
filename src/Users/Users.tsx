@@ -13,7 +13,7 @@ const Users : React.FC = () => {
   },[])
     return (
       <div>
-        <h1>Users List</h1>
+        <h1>Users List Updated</h1> 
         {
          users?.map((user)=>(
             <li>{user}</li>  
