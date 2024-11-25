@@ -72,10 +72,10 @@ jobs:
       - name: Build Frontend
         # working-directory: 
         run: npm run build
-      - name: Deploy to Netlify
+      - name: Deploy to Netlify 
         run: |
           npm install -g netlify-cli
-          netlify deploy --prod --dir=./build --auth ${{ secrets.NETLIFY_API_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}  # Deploy to Netlify
+          netlify deploy --prod --dir=build --auth ${{ secrets.NETLIFY_API_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}  # Deploy to Netlify
 
 
 #  NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
