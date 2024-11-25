@@ -1,77 +1,77 @@
-name: Deploy to Netlify
+# name: Deploy to Netlify
 
-on:
-  push:
-    branches:
-      - main  # or the branch you want to deploy fro
-  pull_request:
-    branches:
-      - main  # optional: if you want to deploy PRs as well
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Set up Node.js (make sure the version matches your project requirements)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: [20.x] # Use the version that your React app supports
-
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Build the React app
-      - name: Build React app
-        run: npm run build
-
-      # Deploy to Netlify
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          curl -sL https://github.com/netlify/cli/releases/download/v3.27.0/netlify-cli-linux-x64.tar.gz | tar xz
-          mv netlify /usr/local/bin/netlify
-          netlify deploy --dir=build --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_API_TOKEN
-
-
-
-
-
-
-
-
-# name: build and deploy
 # on:
 #   push:
 #     branches:
-#       - main
+#       - main  # or the branch you want to deploy fro
+#   pull_request:
+#     branches:
+#       - main  # optional: if you want to deploy PRs as well
+
 # jobs:
-#   frontend-deploy:
+#   deploy:
 #     runs-on: ubuntu-latest
 #     steps:
-#       - name: Repository Checkout
-#         uses: actions/checkout@v4
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v4
+#       # Checkout the repository
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       # Set up Node.js (make sure the version matches your project requirements)
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
 #         with:
-#           node-version: '20.x'
-#           cache: 'npm'
-#       - name: Install Dependencies
-#         run: npm ci
-#         # working-directory: 
-#       - name: Build Frontend
-#         # working-directory: 
+#           node-version: [20.x] # Use the version that your React app supports
+
+#       # Install dependencies
+#       - name: Install dependencies
+#         run: npm install
+
+#       # Build the React app
+#       - name: Build React app
 #         run: npm run build
-#       - name: Deploy to Netlify 
+
+#       # Deploy to Netlify
+#       - name: Deploy to Netlify
+#         env:
+#           NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 #         run: |
-#           npm install -g netlify-cli
-#           netlify deploy --prod --dir=build --auth ${{ secrets.NETLIFY_API_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}  # Deploy to Netlify
+#           curl -sL https://github.com/netlify/cli/releases/download/v3.27.0/netlify-cli-linux-x64.tar.gz | tar xz
+#           mv netlify /usr/local/bin/netlify
+#           netlify deploy --dir=build --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_API_TOKEN
+
+
+
+
+
+
+
+
+name: build and deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  frontend-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci 
+        working-directory: ./
+      - name: Build Frontend
+        working-directory: ./ 
+        run: npm run build
+      - name: Deploy to Netlify  
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --prod --dir=build --auth ${{ secrets.NETLIFY_API_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID }}  # Deploy to Netlify
 
 
